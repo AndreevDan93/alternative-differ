@@ -12,6 +12,7 @@ import java.util.concurrent.Callable;
         description = "Compares two configuration files and shows a difference.")
 
 public class App implements Callable<Integer> {
+    private static final Integer ERROR_CODE = 123;
 
     @Parameters(index = "0", description = "path to first file.")
     private String filepath1;
@@ -28,13 +29,12 @@ public class App implements Callable<Integer> {
     @Override
     public final Integer call() { // your business logic goes here...
         try {
-//            NotStaticDiffer differ = new NotStaticDiffer(filepath1, filepath2, format);
-//            System.out.println(differ.generate());
-            System.out.println(Differ.generate(filepath1, filepath2, format));
+            Engine engine = new Engine(filepath1, filepath2, format);
+            System.out.println(engine.generate());
             return 0;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return 123;
+            return ERROR_CODE;
         }
     }
 

@@ -10,10 +10,10 @@ public final class StylishFormatter extends Formatter {
 
     @Override
     public String format(Map<String, Value> valueMap) {
-       builder.append("{\n");
-       generateFormat(valueMap);
-       builder.append("}");
-       return builder.toString();
+        builder.append("{\n");
+        generateFormat(valueMap);
+        builder.append("}");
+        return builder.toString();
     }
 
     @Override
