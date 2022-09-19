@@ -27,6 +27,10 @@ public abstract class Diff {
 
     public abstract String generate(Format format) throws IOException;
 
+    public final String generate() throws IOException {
+        return generate(Format.STYLISH);
+    }
+
     public final Formatter getFormatter(Format format) {
         return switch (format) {
             case JSON -> new JsonFormatter();
@@ -34,5 +38,6 @@ public abstract class Diff {
             default -> new StylishFormatter();
         };
     }
+
 
 }

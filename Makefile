@@ -10,7 +10,7 @@ install:
 	./gradlew clean install
 
 run-dist:
-	./build/install/app/bin/app
+	./build/install/alternative-differ/bin/alternative-differ
 
 run:
 	./gradlew run

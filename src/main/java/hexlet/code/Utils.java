@@ -14,6 +14,7 @@ public class Utils {
         if (inputPath.isAbsolute() || new File(inputPath.toString()).exists()) {
             return inputPath;
         } else {
+
             StringBuilder absolutePathSB = new StringBuilder(inputPath.toAbsolutePath().toString());
             absolutePathSB.insert(absolutePathSB.length() - inputPathString.length(), LOCAL_PATH_INSIDE_PROJECT);
             absolutePath = Path.of(absolutePathSB.toString());

@@ -30,6 +30,7 @@ class DiffTest {
 
         String expected = new String(Files.readAllBytes(Paths.get("src/test/resources/stylish.txt")));
         assertEquals(expected, diff.generate(stylishFormat));
+        assertEquals(expected, diff.generate());
 
         expected = new String(Files.readAllBytes(Paths.get("src/test/resources/plain.txt")));
         assertEquals(expected, diff.generate(plainFormat));
@@ -46,6 +47,7 @@ class DiffTest {
 
         String expected = new String(Files.readAllBytes(Paths.get("src/test/resources/stylish.txt")));
         assertEquals(expected, diff.generate(stylishFormat));
+        assertEquals(expected, diff.generate());
 
         expected = new String(Files.readAllBytes(Paths.get("src/test/resources/plain.txt")));
         assertEquals(expected, diff.generate(plainFormat));
