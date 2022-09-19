@@ -4,6 +4,7 @@ import hexlet.code.DiffBuilder;
 import hexlet.code.ParserFactory;
 import hexlet.code.Utils;
 import hexlet.code.Value;
+import hexlet.code.formatter.Format;
 import hexlet.code.formatter.Formatter;
 import hexlet.code.parser.Parser;
 
@@ -18,13 +19,13 @@ public class JsonDiff extends Diff {
     }
 
     @Override
-    public String generate(String format) throws IOException {
-        if (!Utils.getExtension(filePath1).equals("json")) {
+    public final String generate(Format format) throws IOException {
+        if (!Utils.getExtension(getFilePath1()).equals("json")) {
             throw new RuntimeException("incorrect input file format");
         }
-        Parser parser = ParserFactory.getParser(this.filePath1, this.filePath2);
-        Map<String, Object> map1 = parser.parse(Utils.getAbsolutePath(filePath1));
-        Map<String, Object> map2 = parser.parse(Utils.getAbsolutePath(filePath2));
+        Parser parser = ParserFactory.getParser(getFilePath1(), getFilePath2());
+        Map<String, Object> map1 = parser.parse(Utils.getAbsolutePath(getFilePath1()));
+        Map<String, Object> map2 = parser.parse(Utils.getAbsolutePath(getFilePath2()));
         Map<String, Value> diff = DiffBuilder.getDiff(map1, map2);
 
         Formatter formatter = getFormatter(format);
