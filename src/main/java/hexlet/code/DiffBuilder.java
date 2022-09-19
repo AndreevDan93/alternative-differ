@@ -1,17 +1,13 @@
-package hexlet.code.differ;
-
-import hexlet.code.Status;
-import hexlet.code.Value;
-
+package hexlet.code;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public final class Differ {
+public final class DiffBuilder {
 
-    public Map<String, Value> getDiff(Map<String, Object> map1, Map<String, Object> map2) {
+    public static Map<String, Value> getDiff(Map<String, Object> map1, Map<String, Object> map2) {
         Set<String> keysSet = new TreeSet<>(map1.keySet());
         keysSet.addAll(map2.keySet());
 
@@ -30,12 +26,11 @@ public final class Differ {
         return diff;
     }
 
-    private boolean compare(Object value1, Object value2) {
+    private static boolean compare(Object value1, Object value2) {
         if (value1 == null || value2 == null) {
             return value1 == null && value2 == null;
         } else {
             return value1.equals(value2);
         }
     }
-
 }

@@ -1,5 +1,8 @@
 package hexlet.code;
 
+import hexlet.code.differ.Diff;
+import hexlet.code.differ.JsonDiff;
+import hexlet.code.differ.YmlDiff;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -28,9 +31,14 @@ public class App implements Callable<Integer> {
 //  is successfully completed.
     @Override
     public final Integer call() { // your business logic goes here...
+
         try {
-            Engine engine = new Engine(filepath1, filepath2, format);
-            System.out.println(engine.generate());
+            Diff differ = switch (Utils.getExtension(filepath1)) {
+                case ("json") -> new JsonDiff(filepath1, filepath2);
+                case ("yml") -> new YmlDiff(filepath1, filepath2);
+                default -> throw new RuntimeException("Unsupported file's format");
+            };
+            differ.generate(format);
             return 0;
         } catch (Exception e) {
             System.out.println(e.getMessage());
