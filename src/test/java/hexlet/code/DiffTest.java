@@ -4,7 +4,7 @@ package hexlet.code;
 import hexlet.code.differ.Diff;
 import hexlet.code.differ.JsonDiff;
 import hexlet.code.differ.YmlDiff;
-import hexlet.code.formatter.Format;
+import hexlet.code.formatter.OutputFormat;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -17,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class DiffTest {
-    private final Format jsonFormat = Format.JSON;
-    private final Format plainFormat = Format.PLAIN;
-    private final Format stylishFormat = Format.STYLISH;
+    private final OutputFormat jsonOutputFormat = OutputFormat.JSON;
+    private final OutputFormat plainOutputFormat = OutputFormat.PLAIN;
+    private final OutputFormat stylishOutputFormat = OutputFormat.STYLISH;
 
 
     @Test
@@ -29,14 +29,14 @@ class DiffTest {
         Diff diff = new JsonDiff(jsonFile1, jsonFile2);
 
         String expected = new String(Files.readAllBytes(Paths.get("src/test/resources/stylish.txt")));
-        assertEquals(expected, diff.generate(stylishFormat));
+        assertEquals(expected, diff.generate(stylishOutputFormat));
         assertEquals(expected, diff.generate());
 
         expected = new String(Files.readAllBytes(Paths.get("src/test/resources/plain.txt")));
-        assertEquals(expected, diff.generate(plainFormat));
+        assertEquals(expected, diff.generate(plainOutputFormat));
 
         expected = new String(Files.readAllBytes(Paths.get("src/test/resources/json.txt")));
-        assertEquals(expected, diff.generate(jsonFormat));
+        assertEquals(expected, diff.generate(jsonOutputFormat));
     }
 
     @Test
@@ -46,14 +46,14 @@ class DiffTest {
         Diff diff = new YmlDiff(ymlFile1, ymlFile2);
 
         String expected = new String(Files.readAllBytes(Paths.get("src/test/resources/stylish.txt")));
-        assertEquals(expected, diff.generate(stylishFormat));
+        assertEquals(expected, diff.generate(stylishOutputFormat));
         assertEquals(expected, diff.generate());
 
         expected = new String(Files.readAllBytes(Paths.get("src/test/resources/plain.txt")));
-        assertEquals(expected, diff.generate(plainFormat));
+        assertEquals(expected, diff.generate(plainOutputFormat));
 
         expected = new String(Files.readAllBytes(Paths.get("src/test/resources/json.txt")));
-        assertEquals(expected, diff.generate(jsonFormat));
+        assertEquals(expected, diff.generate(jsonOutputFormat));
     }
 
 
@@ -61,7 +61,7 @@ class DiffTest {
     void exceptionsNoFileTest() {
         Throwable thrown = catchThrowable(() -> {
             Diff diff = new JsonDiff("json1", "file2");
-            diff.generate(stylishFormat);
+            diff.generate(stylishOutputFormat);
         });
         assertThat(thrown).isInstanceOf(IOException.class);
     }
@@ -70,7 +70,7 @@ class DiffTest {
     void exceptionsDifferentExtensionTest() {
         Throwable thrown = catchThrowable(() -> {
             Diff diff = new JsonDiff("file1.json", "file2.yml");
-            diff.generate(stylishFormat);
+            diff.generate(stylishOutputFormat);
         });
         assertThat(thrown).isInstanceOf(RuntimeException.class);
     }
@@ -80,7 +80,7 @@ class DiffTest {
     void exceptionsInputFormatIsNotSupported() {
         Throwable thrown = catchThrowable(() -> {
             Diff diff = new JsonDiff("file.txt", "file.txt");
-            diff.generate(stylishFormat);
+            diff.generate(stylishOutputFormat);
         });
         assertThat(thrown).isInstanceOf(RuntimeException.class);
     }

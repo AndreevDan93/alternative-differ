@@ -3,7 +3,7 @@ package hexlet.code;
 import hexlet.code.differ.Diff;
 import hexlet.code.differ.JsonDiff;
 import hexlet.code.differ.YmlDiff;
-import hexlet.code.formatter.Format;
+import hexlet.code.formatter.OutputFormat;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -32,18 +32,18 @@ public class App implements Callable<Integer> {
 //  is successfully completed.
     @Override
     public final Integer call() { // your business logic goes here...
-        Format inputFormat = switch (format) {
-            case "plain" -> Format.PLAIN;
-            case "json" -> Format.JSON;
-            default -> Format.STYLISH;
+        OutputFormat outputFormat = switch (format) {
+            case "plain" -> OutputFormat.PLAIN;
+            case "json" -> OutputFormat.JSON;
+            default -> OutputFormat.STYLISH;
         };
         try {
             Diff differ = switch (Utils.getExtension(filepath1)) {
-                case ("json") -> new JsonDiff(filepath1, filepath2);
-                case ("yml") -> new YmlDiff(filepath1, filepath2);
+                case "json" -> new JsonDiff(filepath1, filepath2);
+                case "yml" -> new YmlDiff(filepath1, filepath2);
                 default -> throw new RuntimeException("Unsupported file's format");
             };
-            System.out.println(differ.generate(inputFormat));
+            System.out.println(differ.generate(outputFormat));
             return 0;
         } catch (Exception e) {
             System.out.println(e.getMessage());

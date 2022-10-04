@@ -1,6 +1,6 @@
 package hexlet.code.formatter;
 
-public enum Format {
+public enum OutputFormat {
     JSON,
     PLAIN,
     STYLISH
