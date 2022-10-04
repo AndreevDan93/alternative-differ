@@ -32,7 +32,7 @@ public class App implements Callable<Integer> {
 //  is successfully completed.
     @Override
     public final Integer call() { // your business logic goes here...
-        OutputFormat outputFormat = switch (format) {
+        OutputFormat inputOutputFormat = switch (format) {
             case "plain" -> OutputFormat.PLAIN;
             case "json" -> OutputFormat.JSON;
             default -> OutputFormat.STYLISH;
@@ -43,7 +43,7 @@ public class App implements Callable<Integer> {
                 case "yml" -> new YmlDiff(filepath1, filepath2);
                 default -> throw new RuntimeException("Unsupported file's format");
             };
-            System.out.println(differ.generate(outputFormat));
+            System.out.println(differ.generate(inputOutputFormat));
             return 0;
         } catch (Exception e) {
             System.out.println(e.getMessage());
