@@ -1,6 +1,6 @@
 package hexlet.code;
 
-import hexlet.code.dataFormat.OutputFormat;
+import hexlet.code.formatter.enums.OutputFormat;
 import hexlet.code.formatter.Formatter;
 import hexlet.code.formatter.JsonFormatter;
 import hexlet.code.formatter.PlainFormatter;

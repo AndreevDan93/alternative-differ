@@ -3,7 +3,7 @@ package hexlet.code;
 
 import hexlet.code.differ.Differ;
 
-import hexlet.code.dataFormat.OutputFormat;
+import hexlet.code.formatter.enums.OutputFormat;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;

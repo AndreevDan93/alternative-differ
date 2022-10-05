@@ -8,7 +8,7 @@ import picocli.CommandLine.Parameters;
 
 import java.util.concurrent.Callable;
 
-import static hexlet.code.dataFormat.OutputFormat.getOutputFormat;
+import static hexlet.code.formatter.enums.OutputFormat.getOutputFormat;
 
 
 @Command(name = "getDiff", mixinStandardHelpOptions = true, version = "getDiff 1.0",

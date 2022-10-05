@@ -1,7 +1,7 @@
 package hexlet.code.differ;
 
 import hexlet.code.value.Value;
-import hexlet.code.dataFormat.OutputFormat;
+import hexlet.code.formatter.enums.OutputFormat;
 import hexlet.code.formatter.Formatter;
 import hexlet.code.parser.Parser;
 
@@ -43,6 +43,5 @@ public abstract class Differ {
     }
 
     abstract Parser getParser();
-
 
 }

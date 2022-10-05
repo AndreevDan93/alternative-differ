@@ -1,4 +1,4 @@
-package hexlet.code.dataFormat;
+package hexlet.code.formatter.enums;
 
 public enum OutputFormat {
     JSON("json"),
