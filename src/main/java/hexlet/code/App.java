@@ -1,15 +1,14 @@
 package hexlet.code;
 
-import hexlet.code.differ.Diff;
-import hexlet.code.differ.JsonDiff;
-import hexlet.code.differ.YmlDiff;
-import hexlet.code.formatter.OutputFormat;
+import hexlet.code.differ.Differ;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 import java.util.concurrent.Callable;
+
+import static hexlet.code.dataFormat.OutputFormat.getOutputFormat;
 
 
 @Command(name = "getDiff", mixinStandardHelpOptions = true, version = "getDiff 1.0",
@@ -32,18 +31,9 @@ public class App implements Callable<Integer> {
 //  is successfully completed.
     @Override
     public final Integer call() { // your business logic goes here...
-        OutputFormat inputOutputFormat = switch (format) {
-            case "plain" -> OutputFormat.PLAIN;
-            case "json" -> OutputFormat.JSON;
-            default -> OutputFormat.STYLISH;
-        };
         try {
-            Diff differ = switch (Utils.getExtension(filepath1)) {
-                case "json" -> new JsonDiff(filepath1, filepath2);
-                case "yml" -> new YmlDiff(filepath1, filepath2);
-                default -> throw new RuntimeException("Unsupported file's format");
-            };
-            System.out.println(differ.generate(inputOutputFormat));
+            Differ differ = DifferFactory.getDiffer(filepath1, filepath2);
+            System.out.println(differ.generate(getOutputFormat(format)));
             return 0;
         } catch (Exception e) {
             System.out.println(e.getMessage());

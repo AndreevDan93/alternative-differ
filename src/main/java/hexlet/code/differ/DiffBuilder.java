@@ -1,4 +1,7 @@
-package hexlet.code;
+package hexlet.code.differ;
+
+import hexlet.code.value.Status;
+import hexlet.code.value.Value;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,13 +17,17 @@ public final class DiffBuilder {
         Map<String, Value> diff = new LinkedHashMap<>();
         for (String key : keysSet) {
             if (!map1.containsKey(key)) {
-                diff.put(key, new Value(null, map2.get(key), Status.STATUS_ADDED));
+                Value value = new Value(null, map2.get(key), Status.STATUS_ADDED);
+                diff.put(key, value);
             } else if (!map2.containsKey(key)) {
-                diff.put(key, new Value(map1.get(key), null, Status.STATUS_DELETED));
+                Value value = new Value(map1.get(key), null, Status.STATUS_DELETED);
+                diff.put(key, value);
             } else if (compare(map1.get(key), map2.get(key))) {
-                diff.put(key, new Value(map1.get(key), map2.get(key), Status.STATUS_UNCHANGED));
+                Value value = new Value(map1.get(key), map2.get(key), Status.STATUS_UNCHANGED);
+                diff.put(key, value);
             } else {
-                diff.put(key, new Value(map1.get(key), map2.get(key), Status.STATUS_CHANGED));
+                Value value = new Value(map1.get(key), map2.get(key), Status.STATUS_CHANGED);
+                diff.put(key, value);
             }
         }
         return diff;

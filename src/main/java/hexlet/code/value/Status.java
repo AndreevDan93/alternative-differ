@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.value;
 
 public enum Status {
     STATUS_UNCHANGED,

@@ -1,7 +1,7 @@
 package hexlet.code.formatter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import hexlet.code.Value;
+import hexlet.code.value.Value;
 
 import java.util.Map;
 

@@ -1,7 +1,8 @@
 package hexlet.code.formatter;
 
-import hexlet.code.Value;
+import hexlet.code.value.Value;
 
+import java.util.List;
 import java.util.Map;
 
 public final class PlainFormatter extends Formatter {
@@ -18,7 +19,7 @@ public final class PlainFormatter extends Formatter {
         builder.append("Property '")
                 .append(key)
                 .append("' was added with value: ")
-                .append(getPlainValue(valueMap.get(key).getSecondOb()))
+                .append(getPlainValue(valueMap.get(key).getValue2()))
                 .append("\n");
     }
 
@@ -35,9 +36,9 @@ public final class PlainFormatter extends Formatter {
         builder.append("Property '")
                 .append(key)
                 .append("' was updated. From ")
-                .append(getPlainValue(valueMap.get(key).getFirstOb()))
+                .append(getPlainValue(valueMap.get(key).getValue1()))
                 .append(" to ")
-                .append(getPlainValue(valueMap.get(key).getSecondOb()))
+                .append(getPlainValue(valueMap.get(key).getValue2()))
                 .append("\n");
     }
 
@@ -46,15 +47,14 @@ public final class PlainFormatter extends Formatter {
     }
 
     private static String getPlainValue(Object value) {
-        if (value == null) {
-            return null;
-        } else if (value instanceof String) {
-            return "'" + value + "'";
-        } else if (value instanceof Integer || value instanceof Boolean) {
-            return value.toString();
-        } else {
+        if (value instanceof List<?> || value instanceof Map<?, ?>) {
             return "[complex value]";
+        } else if (value instanceof String) {
+            return String.format("'%s'", value);
+        } else {
+            return String.valueOf(value);
         }
+
     }
 }
 

@@ -26,8 +26,7 @@ public class Utils {
     }
 
     public static String getExtension(String path) throws IOException {
-        String absolutePath = getAbsolutePath(path).toString();
-        return (absolutePath.substring(absolutePath.lastIndexOf(".") + 1));
+        return (path.substring(path.lastIndexOf(".") + 1));
     }
 
 
