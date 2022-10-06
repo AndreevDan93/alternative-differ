@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 
-public class Utils {
+public final class Utils {
     static final String LOCAL_PATH_INSIDE_PROJECT = "src/main/resources/";
 
     public static Path getAbsolutePath(String inputPathString) throws IOException {

@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import static hexlet.code.Utils.getExtension;
 
-public class DifferFactory {
+public final class DifferFactory {
 
     public static Differ getDiffer(String filepath1, String filepath2) throws IOException {
         extMatchingCheck(filepath1, filepath2);
